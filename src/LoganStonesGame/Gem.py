@@ -21,6 +21,13 @@ class Gem(object):
         self.currrent_side = (self.currrent_side + 1)%2 # 0->1, 1->0
 
 
-class GemEntity(object):
+class GemEntity:
     # надо в будущем сделать возможность задавать кол-во (3/5/7/...) сущностей
-    entities_list = [""] 
+    # 0 - камень, 1 - ножницы, 2 - бумага
+    entities_list = [0,1,2]
+    relations = {0:[1], 1:[2], 2:[0]}
+    @staticmethod
+    def entites_relation(p_entity_1, p_entity_2):
+        if p_entity_1 == 0:
+            
+        
