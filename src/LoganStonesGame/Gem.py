@@ -3,6 +3,7 @@ Created on 2 июля 2016 г.
 
 @author: Павел
 '''
+from builtins import staticmethod
 
 class Gem(object):
     '''
@@ -24,10 +25,30 @@ class Gem(object):
 class GemEntity:
     # надо в будущем сделать возможность задавать кол-во (3/5/7/...) сущностей
     # 0 - камень, 1 - ножницы, 2 - бумага
-    entities_list = [0,1,2]
-    relations = {0:[1], 1:[2], 2:[0]}
+    
+    #генерируем список сущностей и отношения между ними
     @staticmethod
-    def entites_relation(p_entity_1, p_entity_2):
-        if p_entity_1 == 0:
+    def init_entities(p_count):
+        GemEntity.entity_count = p_count
+        GemEntity.entities_list = [x for x in range(GemEntity.entity_count)]
+        # генерируем список отношений
+        GemEntity.relations = {}
+        for i in GemEntity.entities_list:
+            flip_list = [] # список сущсностей, которых "бьет" сущность i
+            for j in range(1,GemEntity.entity_count//2+1): # кол-во сущностей = половина без i-й: если 3 сущности -- то (3-1)/2=1; если 5 -- (5-1)/2=2
+                flip_list.append((i+j)%GemEntity.entity_count)
+            GemEntity.relations[i] = flip_list
+    
+    @staticmethod
+    def check_flip(entity_forcer, entity_to_flip):
+        if entity_forcer in GemEntity.entities_list:
+            if entity_to_flip in GemEntity.relations[entity_forcer]:
+                return True
+        return False
+    
+    
+            
+    
+
             
         
