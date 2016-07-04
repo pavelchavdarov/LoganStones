@@ -33,11 +33,11 @@ class GemEntity:
         GemEntity.entities_list = [x for x in range(GemEntity.entity_count)]
         # генерируем список отношений
         GemEntity.relations = {}
-        for i in GemEntity.entities_list:
+        for i in range(GemEntity.entity_count):
             flip_list = [] # список сущсностей, которых "бьет" сущность i
             for j in range(1,GemEntity.entity_count//2+1): # кол-во сущностей = половина без i-й: если 3 сущности -- то (3-1)/2=1; если 5 -- (5-1)/2=2
                 flip_list.append((i+j)%GemEntity.entity_count)
-            GemEntity.relations[i] = flip_list
+            GemEntity.relations[GemEntity.entities_list[i]] = flip_list
     
     @staticmethod
     def check_flip(entity_forcer, entity_to_flip):
