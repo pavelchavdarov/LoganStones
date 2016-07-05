@@ -20,31 +20,10 @@ class Gem(object):
     
     def flip(self):
         self.currrent_side = (self.currrent_side + 1)%2 # 0->1, 1->0
-
-
-class GemEntity:
-    # надо в будущем сделать возможность задавать кол-во (3/5/7/...) сущностей
-    # 0 - камень, 1 - ножницы, 2 - бумага
     
-    #генерируем список сущностей и отношения между ними
-    @staticmethod
-    def init_entities(p_count):
-        GemEntity.entity_count = p_count
-        GemEntity.entities_list = [x for x in range(GemEntity.entity_count)]
-        # генерируем список отношений
-        GemEntity.relations = {}
-        for i in range(GemEntity.entity_count):
-            flip_list = [] # список сущсностей, которых "бьет" сущность i
-            for j in range(1,GemEntity.entity_count//2+1): # кол-во сущностей = половина без i-й: если 3 сущности -- то (3-1)/2=1; если 5 -- (5-1)/2=2
-                flip_list.append((i+j)%GemEntity.entity_count)
-            GemEntity.relations[GemEntity.entities_list[i]] = flip_list
-    
-    @staticmethod
-    def check_flip(entity_forcer, entity_to_flip):
-        if entity_forcer in GemEntity.entities_list:
-            if entity_to_flip in GemEntity.relations[entity_forcer]:
-                return True
-        return False
+    def current_side(self):
+        return self.stone_sides[self.currrent_side]
+
     
     
             
