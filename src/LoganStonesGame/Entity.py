@@ -6,7 +6,7 @@ Created on 5 июля 2016 г.
 class GemEntity:
     # надо в будущем сделать возможность задавать кол-во (3/5/7/...) сущностей
     # 0 - камень, 1 - ножницы, 2 - бумага
-    
+    GemEntity.relations = {}
     #генерируем список сущностей и отношения между ними
     @staticmethod
     def init_entities(p_count):
@@ -27,3 +27,14 @@ class GemEntity:
             if entity_to_flip in GemEntity.relations[entity_forcer]:
                 return True
         return False
+    
+    @staticmethod
+    def get_entity_relation(entity):
+        if entity in GemEntity.entities_list:
+            return GemEntity.relations[entity]
+        else:
+            return {}
+    
+    @staticmethod
+    def get_entities():
+        return GemEntity.entities_list
