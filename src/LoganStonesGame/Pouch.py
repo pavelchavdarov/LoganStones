@@ -5,9 +5,9 @@ Created on 5 июля 2016 г.
 '''
 from LoganStonesGame.Entity import GemEntity
 from LoganStonesGame.Gem import Gem
-from _socket import SHUT_RD
 from random import shuffle
 from random import choice
+import math
 
 
 
@@ -16,19 +16,28 @@ class Pouch(object):
     classdocs
     '''
 
-    STONE_COUNT = 18
+    #STONE_COUNT = 18
     ENTITY_COUNT = 3
+    #GEMS_PER_PLAYER = 8
+    GEM_COMBOS_AMOUNT = 6
 
+    def __comb__(self, entity_amount, set_size):
+        return math.factorial(entity_amount)/(math.factorial(set_size)*math.factorial(entity_amount - set_size))
+    
     def __init__(self):
         '''
         Constructor
         '''
+        self.stone_count = (Pouch.GEMS_PER_PLAYER + 1)*2; # 2 players. every player puts 1 gem on the board at start of a game
         self.gems = []
-        self.stone_count = Pouch.STONE_COUNT
         GemEntity.init_entities(Pouch.ENTITY_COUNT)
-        for i in range(Pouch.STONE_COUNT/Pouch.ENTITY_COUNT):
+        gem_combinations = Pouch.__comb__(Pouch.ENTITY_COUNT,Gem.GEM_SIDES)
+        self.stone_count = gem_combinations * Pouch.GEM_COMBOS_AMOUNT
+        for i in range(Pouch.GEM_COMBOS_AMOUNT): # 
+            # generation of unique pairs of entities
             for ent in GemEntity.get_entities():
-                self.gems.append(Gem(ent, GemEntity.get_entity_relation(ent)[0]))
+                for gem_rel in GemEntity.get_entity_relation(ent):
+                    self.gems.append(Gem(ent, gem_rel))
     
     def p_shuffle(self):
         shuffle(self.gems)

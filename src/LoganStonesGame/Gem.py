@@ -13,7 +13,7 @@ class Gem(object):
     - равенство (метка равна сама себе): для a из M a = a
     - превосходство: для a,b из M истинно одно из: a > b или b > a 
     '''
-    
+    GEM_SIDES = 2 # always 2 sides, because of relation "A beats B" 
     def __init__(self, p_side_a, p_side_b):
         self.stone_sides = (p_side_a, p_side_b)
         self.currrent_side = 0
