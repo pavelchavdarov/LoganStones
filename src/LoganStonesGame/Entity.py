@@ -6,7 +6,7 @@ Created on 5 июля 2016 г.
 class GemEntity:
     # надо в будущем сделать возможность задавать кол-во (3/5/7/...) сущностей
     # 0 - камень, 1 - ножницы, 2 - бумага
-    GemEntity.relations = {}
+    relations = {}
     #генерируем список сущностей и отношения между ними
     @staticmethod
     def init_entities(p_count):
