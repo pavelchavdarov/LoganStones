@@ -1,7 +1,7 @@
 class Cell_Position (object):
 	# для кубических координат
 	#! специфично для куб-коодинат
-	directions = [(0,1,-1),(1,0,-1),(1,-1,0),(0,-1,1),(-1,0,1),(-1,1,0)]
+	directions = tuple([(0,1,-1),(1,0,-1),(1,-1,0),(0,-1,1),(-1,0,1),(-1,1,0)])
 
 # убрать это отсюда. признаков не будет. Объекты фишек буду переноситься из одного списка в другой: из списка "мешочек" в список "игров_1", от туда в список "доска"
 ################################	
@@ -28,12 +28,13 @@ class Cell_Position (object):
 			result = 0 # позиция задана корректно
 		return result
 	
+	#возвращает множество координат соседей
 	def get_neighbours(self):
-		neighbours = []
+		neighbours = set()
 		for i in range(len(Cell_Position.directions)):
 			_x = self.X + Cell_Position.directions[i][0]
 			_y = self.Y + Cell_Position.directions[i][1]
-			_z = self.Z+Cell_Position.directions[i][2]
+			_z = self.Z + Cell_Position.directions[i][2]
 			neighbours.add((_x,_y,_z))
 		return set(neighbours)
 
