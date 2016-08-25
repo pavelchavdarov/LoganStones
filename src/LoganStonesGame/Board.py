@@ -3,22 +3,6 @@ class Cell_Position (object):
 	#! специфично для куб-коодинат
 	directions = tuple([(0,1,-1),(1,0,-1),(1,-1,0),(0,-1,1),(-1,0,1),(-1,1,0)])
 
-# убрать это отсюда. признаков не будет. Объекты фишек буду переноситься из одного списка в другой: из списка "мешочек" в список "игров_1", от туда в список "доска"
-################################	
-#	# x==y==z==-1 --- значит фишка в мешочке
-#	#! специфично для куб-коодинат
-#	def into_baggie(self):
-#		self.X = -1
-#		self.Y = -1
-#		self.Z = -1
-#	# x==y==z==N and N>0 --- значит фишка у игрока N
-#	#! специфично для куб-коодинат
-#	def to_player(self, player_num):
-#		self.X = player_num
-#		self.Y = player_num
-#		self.Z = player_num
-################################
-
 	# применяется только для фишек на поле (доске)
 	#! специфично для куб-коодинат
 	def check_position(self, position):
@@ -41,13 +25,22 @@ class Cell_Position (object):
 #############################################
 #все правила постановки фишек, проверку достижения цели (4 в ряд) будет делать "игровая доска" 
 class Board (Cell_Position):		
+	
+	def __init__(self):
+		self.gems = dict() # камни на доске
+	
 	def island_rule(self):
-		return 0
+		def check_island_rule(self, gem_dict):
+			None
+			
+		return check_island_rule
 		
 	def adding_rule(self):
-		return 0 # ту нужно реализовать проверку соседей: должно быть мин. 2 соседа
+		return 0 # тут нужно реализовать проверку соседей: должно быть мин. 2 соседа
 	
-	def place_on_board(self, position):
-		# проверка позиции на доске
-		None
+	def flip_rule(self):
+		return 0
+	
+	def place_gem_on_board(self, p_gem, p_position):
+		self.gems[p_position] = p_gem
 			
