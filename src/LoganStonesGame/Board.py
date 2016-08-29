@@ -1,8 +1,9 @@
 
 from LoganStonesGame.GameRoolCheckers import *
 
-class Cell_Position (object):
-	# для кубических координат
+
+ 
+class Board (object):		
 	#! специфично для куб-коодинат
 	directions = tuple([(0,1,-1),(1,0,-1),(1,-1,0),(0,-1,1),(-1,0,1),(-1,1,0)])
 
@@ -14,20 +15,6 @@ class Cell_Position (object):
 		else:
 			result = 0 # позиция задана корректно
 		return result'''
-	
-	#возвращает множество координат соседей
-	def get_neighbours(self):
-		neighbours = set()
-		for i in range(len(Cell_Position.directions)):
-			_x = self.X + Cell_Position.directions[i][0]
-			_y = self.Y + Cell_Position.directions[i][1]
-			_z = self.Z + Cell_Position.directions[i][2]
-			neighbours.add((_x,_y,_z))
-		return set(neighbours)
-
-#############################################
-#все правила постановки фишек, проверку достижения цели (4 в ряд) будет делать "игровая доска" 
-class Board (Cell_Position):		
 	
 	def __init__(self):
 		self.gems = dict() # камни на доске
