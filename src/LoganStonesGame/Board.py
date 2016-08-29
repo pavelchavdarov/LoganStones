@@ -1,3 +1,6 @@
+
+from LoganStonesGame.GameRoolCheckers import *
+
 class Cell_Position (object):
 	# для кубических координат
 	#! специфично для куб-коодинат
@@ -5,12 +8,12 @@ class Cell_Position (object):
 
 	# применяется только для фишек на поле (доске)
 	#! специфично для куб-коодинат
-	def check_position(self, position):
+	'''def check_position(self, position):
 		if position[0]+position[1]+position[2]!=0:
 			result = 1 # ошибка: сумма координат должна быть равна 0
 		else:
 			result = 0 # позиция задана корректно
-		return result
+		return result'''
 	
 	#возвращает множество координат соседей
 	def get_neighbours(self):
@@ -41,6 +44,10 @@ class Board (Cell_Position):
 	def flip_rule(self):
 		return 0
 	
+	@place_rool
 	def place_gem_on_board(self, p_gem, p_position):
 		self.gems[p_position] = p_gem
+		
+	def flip_gem(self,p_position):
+		self.gems[p_position].flip()
 			

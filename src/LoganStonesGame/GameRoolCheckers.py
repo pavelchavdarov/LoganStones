@@ -9,7 +9,7 @@ def place_rool(func):
             # проверка
             l_pos = args[1] # первым аргументов ожидаем координаты
             if l_pos[0]+l_pos[1]+l_pos[2]==0:
-                func(self, *args, **kwargs)
+                func(*args, **kwargs)
             #else:
             #    Exception()
         
