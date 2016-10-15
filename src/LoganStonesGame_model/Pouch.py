@@ -3,8 +3,8 @@ Created on 5 июля 2016 г.
 
 @author: Павел
 '''
-from LoganStonesGame.Entity import GemEntity
-from LoganStonesGame.Gem import Gem
+from LoganStonesGame_model.Entity import GemEntity
+from LoganStonesGame_model.Gem import Gem
 from random import shuffle
 from random import choice
 from math import factorial

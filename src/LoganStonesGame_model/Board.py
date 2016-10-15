@@ -1,4 +1,4 @@
-
+'''
 def place_rool(func):
 		def position_checker(*args, **kwargs):
 			# проверка
@@ -22,7 +22,7 @@ def neighbours_rool(func):
 #			Exception
 	
 	return neighbours_checker 
-
+'''
 class Board_cube (object):		
 	#! специфично для куб-коодинат
 	directions = tuple([(0,1,-1),(1,0,-1),(1,-1,0),(0,-1,1),(-1,0,1),(-1,1,0)])
@@ -42,6 +42,11 @@ class Board_cube (object):
 	def island_rule(self):
 		return 1
 		
+	def place_rule(self, p_position):
+		l_pos = p_position
+		return 1 if l_pos[0]+l_pos[1]+l_pos[2]==0 else 0
+
+	
 	def adding_rule(self, p_position):
 		neihgbours = set() ## множество соседей позиии p_position
 		for d in self.directions:
@@ -55,8 +60,6 @@ class Board_cube (object):
 	def flip_rule(self):
 		return 0
 	
-	@place_rool
-	@neighbours_rool
 	def place_gem_on_board(self, p_gem, p_position):
 		self.gems[p_position] = p_gem
 		
