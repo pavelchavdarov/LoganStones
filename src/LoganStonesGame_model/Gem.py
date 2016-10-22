@@ -16,13 +16,13 @@ class Gem(object):
     GEM_SIDES = 2 # always 2 sides, because of relation "A beats B" 
     def __init__(self, p_side_a, p_side_b):
         self.stone_sides = (p_side_a, p_side_b)
-        self.currrent_side = 0
+        self.current_side = 0
     
     def flip(self):
-        self.currrent_side = (self.currrent_side + 1)%2 # 0->1, 1->0
+        self.current_side = (self.current_side + 1)%2 # 0->1, 1->0
     
     def current_side(self):
-        return self.stone_sides[self.currrent_side]
+        return self.stone_sides[self.current_side]
 
     
     
