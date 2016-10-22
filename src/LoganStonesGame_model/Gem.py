@@ -3,7 +3,6 @@ Created on 2 июля 2016 г.
 
 @author: Павел
 '''
-from builtins import staticmethod
 
 class Gem(object):
     '''
