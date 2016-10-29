@@ -3,7 +3,9 @@ Created on 5 июля 2016 г.
 
 @author: Павел
 '''
-class GemEntity:
+from abc import ABC
+
+class GemEntity(ABC):
     # надо в будущем сделать возможность задавать кол-во (3/5/7/...) сущностей
     # 0 - камень, 1 - ножницы, 2 - бумага
     relations = {}

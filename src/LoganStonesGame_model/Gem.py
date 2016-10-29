@@ -20,8 +20,9 @@ class Gem(object):
     def flip(self):
         self.current_side = (self.current_side + 1)%2 # 0->1, 1->0
     
-    def current_side(self):
-        return self.stone_sides[self.current_side]
+    def get_current_side(self):
+        l_cur_side = self.stone_sides[self.current_side] 
+        return l_cur_side
 
     
     

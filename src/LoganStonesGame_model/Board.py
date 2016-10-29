@@ -1,30 +1,7 @@
-'''
-def place_rool(func):
-		def position_checker(*args, **kwargs):
-			# проверка
-			l_pos = args[2] # первым аргументов ожидаем координаты
-			if l_pos[0]+l_pos[1]+l_pos[2]==0:
-				func(*args, **kwargs)
-			#else:
-			#    Exception()
-		
-		return position_checker
-
-def neighbours_rool(func):
-	def neighbours_checker(*args, **kwargs):
-		neihgbours = set() ## множество соседей позиии p_position
-		for d in args[0].directions:
-			neihgbours.add((args[2].[0]+d[0],args[2].[1]+d[1], args[2].[2]+d[2]))
-		l_intersection = neihgbours.intersection()(set(args[0].gems))
-		if len(l_intersection) >=2: # должно быть мин. 2 соседа
-			func(*args, **kwargs)
-#		else:
-#			Exception
-	
-	return neighbours_checker 
-'''
 from _functools import reduce
 from LoganStonesGame_model.Entity import GemEntity
+from random import randrange
+
 
 class Board_cube (object):		
 	#! специфично для куб-коодинат
@@ -41,18 +18,21 @@ class Board_cube (object):
 		return result'''
 	# возвращает множество из 6 соседей для p_position 
 	def _get_neihgbours(self,p_position):
-		return set(tuple(map(self.point_move, p_position, x)) for x in self.directions)
+		return set(tuple(map(lambda x,y:x+y, tuple(p_position), z)) for z in self.directions)
 		
-	def __init__(self):
+	def __init__(self, gem_1=None, gem_2 = None):
 		self.gems = dict() # камни на доске
-	
+		if gem_1 and gem_2:
+			self.gems[(0,0,0)] = gem_1
+			l_pos = randrange(0,6)
+			self.gems[self.directions[l_pos]] = gem_2
+
 	def island_rule(self):
 		return 1==1
 		
 	def place_rule(self, p_position):
 		l_pos = p_position[:]
 		return reduce(lambda x, y : x+y, l_pos ) == 0
-
 	
 	def adding_rule(self, p_position):
 		neighbors = self._get_neihgbours(p_position)
@@ -66,10 +46,15 @@ class Board_cube (object):
 		if self.place_rule(p_position):
 			adding = self.adding_rule(p_position)
 			if adding['rule']:
-				self.gems[p_position] = p_gem
-				map(self.flip_gem,filter(lambda x: GemEntity.check_flip(p_gem.current_side, self.gems[x].current_side), adding['neighbors']))
+				#print('adding_rule - yes')
+				self.gems[tuple(p_position)] = p_gem
+				for gem_pos in list(filter(lambda x: GemEntity.check_flip(p_gem.get_current_side(), self.gems[x].get_current_side()), adding['neighbors'])):
+					#print('flipping')
+					self.flip_gem(gem_pos)
+				return 0
+			else:
+				return 1
 				
-		
 	def flip_gem(self,p_position):
-		self.gems[p_position].flip()
+		self.gems[tuple(p_position)].flip()
 			
