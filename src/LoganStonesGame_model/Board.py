@@ -48,9 +48,10 @@ class Board_cube (object):
 			if adding['rule']:
 				#print('adding_rule - yes')
 				self.gems[tuple(p_position)] = p_gem
-				for gem_pos in list(filter(lambda x: GemEntity.check_flip(p_gem.get_current_side(), self.gems[x].get_current_side()), adding['neighbors'])):
-					#print('flipping')
+				for gem_pos in list(filter(lambda x: self.gems[x].check_to_flip(p_gem), adding['neighbors'])):
 					self.flip_gem(gem_pos)
+#				for gem_pos in list(filter(lambda x: GemEntity.check_flip(p_gem.get_current_side(), self.gems[x].get_current_side()), adding['neighbors'])):
+#					self.flip_gem(gem_pos)
 				return 0
 			else:
 				return 1
